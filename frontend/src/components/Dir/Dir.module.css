@@ -36,6 +36,11 @@
     height: 120px;
     margin: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    transition: all .5s ease;
+}
+
+.card:hover {
+    box-shadow: 0 14px 8px 0 rgba(0, 0, 0, 0.5);
 }
 
 .card .icon {
@@ -44,14 +49,21 @@
     color: #212529;
 }
 
+.card img {
+    width: 100%;
+}
+
 .card .footer {
     width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card .footer h1 {
     margin: 0 0 0 10px;
     color: #343a40;
+    font-size: 15px;
 }
 
 .card .footer .options {

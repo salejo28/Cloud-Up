@@ -2,6 +2,7 @@ import React from 'react';
 import fontawesome from '@fortawesome/fontawesome'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/fontawesome-free-solid'
+import decode from 'jwt-decode';
 
 import api from '../../service/Dir';
 import styles from './Dir.module.css'
@@ -12,17 +13,24 @@ fontawesome.library.add(faPlus);
 export default class Dir extends React.Component {
 
     state = {
+        loading: true,
         dir: {},
     }
 
     componentDidMount() {
         this.loadContent();
+        setTimeout(() => {
+            this.setState({
+                loading: false
+            })
+        }, 3000)
     }
 
     async loadContent() {
         const token = localStorage.getItem('token');
         try {
-            const dir = await api.getContent(this.props.match.params.path || '', token);
+            const path = this.props.match.params.path
+            const dir = await api.getContent(path || '', token);
             this.setState({
                 dir
             })
@@ -31,7 +39,35 @@ export default class Dir extends React.Component {
         }
     }
 
-    async fillContent() {
+    fillContent() {
+        if (this.state.loading) {
+            return console.log('cargando')
+        }
+        const token = localStorage.getItem('token')
+        const decodeToken = decode(token)
+        const content = this.state.dir.content
+        const path = this.props.match.params.path
+        const dirPath = this.state.dir.dirPath
+
+        const directories = [
+            <Dirent
+                name="Up a dir"
+                key="parent"
+                isDirectory
+                parentDirectory
+                path={path}
+            />,
+        ]
+
+        content.dirs.forEach(dir => {
+            directories.push(<Dirent name={dir} isDirectory key={dir} path={path} />)
+        })
+
+        const files = content.files.map(file => (
+            <Dirent name={file} key={file} path={path} _id={decodeToken._id} />
+        ))
+
+        return [...directories, ...files]
 
     }
 
@@ -40,19 +76,7 @@ export default class Dir extends React.Component {
             <div className="container">
 
                 <div className={styles.content_dirent}>
-                    <Dirent />
-                    <Dirent />
-                    <Dirent />
-                    <Dirent />
-                    <Dirent />
-                    <Dirent />
-                    <Dirent />
-                    <Dirent />
-                    <Dirent />
-                    <Dirent />
-                    <Dirent />
-                    <Dirent />
-                    <Dirent />
+                    {this.fillContent()}      
                 </div>
 
                 <div className={styles.content}>
