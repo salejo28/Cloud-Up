@@ -1,0 +1,67 @@
+.card {
+    width: 100%;
+    height: 100%;
+    box-shadow: 1px 0 5px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    display: block;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.card .btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card .btns a {
+    border-radius: 20px;
+    border: 2px solid #1d3557;
+    color: #000;
+    padding: 10px 20px;
+}
+
+.card .btns button {
+    padding: 10px 30px;
+    text-transform: uppercase;
+    background: transparent;
+    border-radius: 30px;
+    border: 2px solid #e63946;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+.card .btns button:hover {
+    color: #fff;
+    background: #e63946;
+}
+
+.card .data {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 5px;
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #ccc;
+}
+
+.card .data h2 span {
+    color: #1d3557;
+}
+
+.card .data button {
+    margin: 0 20px;
+    padding: 10px 20px;
+    color: #000;
+    background: transparent;
+    outline: none;
+    border: 2px solid #457b9d;
+    text-transform: uppercase;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+.card .data button:hover {
+    color: #fff;
+    background: #457b9d;
+}

@@ -1,0 +1,143 @@
+.form {
+    padding: 20px;
+    background-color: #fff;
+    width: 370px;
+    height: 100%;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, .5);
+    float: right;
+}
+
+.title_form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.title_form h2 {
+    text-transform: uppercase;
+    color: #1d3557;
+    font-size: 30px;
+}
+
+.form .group {
+    position: relative;
+    margin: 35px;
+}
+
+.form .group input {
+    background: none;
+    color: #c6c6c6;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #49454567;
+}
+
+.form .group input:focus {
+    outline: none;
+    color: rgb(94, 93, 93);
+}
+
+.form .group label {
+    color: #49454567;
+    font-size: 16px;
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    transition: .5s ease-in-out;
+    pointer-events: none;
+}
+
+.form .group input:focus~label, .form .group input:valid~label {
+    top: -14px;
+    font-size: 12px;
+    color: #457b9d;
+}
+
+.form .group.error input:focus~label,
+.form .group.error input:valid~label {
+    color: #e63946;
+}
+
+.bar {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.form .group .bar::before {
+    content: '';
+    height: 2px;
+    width: 0%;
+    bottom: 0;
+    position: absolute;
+    background: #16222A;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #3A6073, #16222A);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3A6073, #16222A);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    transition: .3s ease width;
+    left: 0;
+}
+
+.form .group.error .bar::before {
+    content: '';
+    height: 2px;
+    width: 0%;
+    bottom: 0;
+    position: absolute;
+    background: #ED213A;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    transition: .3s ease width;
+    left: 0;
+}
+
+.form .group input:focus~.bar::before {
+    width: 100%;
+}
+
+.form .group small {
+    visibility: hidden;
+    position: absolute;
+    margin: 3px;
+    display: none;
+    transition: .5s ease;
+}
+
+.form .group.error small {
+    visibility: visible;
+    color: #e63946;
+    display: block;
+}
+
+.form .btn_form {
+    background: #16222A;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #3A6073, #16222A);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3A6073, #16222A);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border: none;
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    color: #fff;
+    height: 40px;
+    text-transform: uppercase;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.form .btn_form.disabled {
+    cursor: none;
+    pointer-events: none;
+    opacity: .5;
+}

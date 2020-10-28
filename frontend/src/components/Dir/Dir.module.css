@@ -1,0 +1,74 @@
+.content {
+    display: flex;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+
+.content .btn_plus {
+    position: relative;
+    padding: 20px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    box-shadow: 5px 0px 20px rgba(0, 0, 0, .5);
+    cursor: pointer;
+}
+
+.content .btn_plus .icon {
+    font-size: 20px;
+    color: #e63946;
+}
+
+/* Dirent isDirectory */
+
+.content_dirent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    border: none;
+    border-radius: 5px;
+    width: 120px;
+    height: 120px;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.card .icon {
+    width: 100%;
+    font-size: 80px;
+    color: #212529;
+}
+
+.card .footer {
+    width: 100%;
+    display: flex;
+}
+
+.card .footer h1 {
+    margin: 0 0 0 10px;
+    color: #343a40;
+}
+
+.card .footer .options {
+    position: relative;
+    padding: 5px;
+}
+
+.card .footer .options .icon_option {
+    margin: 3px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #343a40;
+    transition: all .3s ease;
+}
+
+.card .footer .options .icon_option:hover {
+    color: #1c1f22;
+}
+
+/* Dirent isDocument */
