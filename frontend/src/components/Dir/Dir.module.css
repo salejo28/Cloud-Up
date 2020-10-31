@@ -13,6 +13,7 @@
     background: #fff;
     box-shadow: 5px 0px 20px rgba(0, 0, 0, .5);
     cursor: pointer;
+    outline: none;
 }
 
 .content .btn_plus .icon {
@@ -51,6 +52,7 @@
 
 .card img {
     width: 100%;
+    border-radius: 5px 5px 0 0;
 }
 
 .card .footer {
@@ -83,4 +85,63 @@
     color: #1c1f22;
 }
 
-/* Dirent isDocument */
+.card .options_list {
+    position: absolute;
+    background: #fff;
+    width: 120px;
+    height: 80px;
+    animation: flip forwards;
+    animation-duration: .3s;
+    animation-timing-function: ease-in-out;
+}
+
+.card .options_list ul {
+    display: block;
+}
+
+.card .options_list ul li {
+    padding: 5px;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    transition: all .5s;
+}
+
+.card .options_list ul li:hover {
+    background-color: #ccc;
+}
+
+.card .options_list ul li button {
+    background: transparent;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+@keyframes flip {
+    0% {
+        opacity: 0;
+        transform: rotateY(-90deg);
+    }
+    100% {
+        opacity: 1;
+        transform: rotateY(0deg);
+    }
+}
+
+/* Content Modal */
+.content_modal {
+    position: absolute;
+    width: 100%;
+    height: 88vh;
+    background: rgba(0, 0, 0, .5);
+    z-index: 1;
+}
+
+.icon_modal {
+    font-size: 30px;
+    float: right;
+    margin: 20px;
+    cursor: pointer;
+    color: #fff;
+}

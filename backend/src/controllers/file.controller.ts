@@ -34,8 +34,7 @@ class Files {
 
         const { _id } = req.user;
         const dirPath = processPath(req.params.path, _id)
-        let files: any = req.files['']
-        // console.log(files)
+        let files: any = req.files.file
 
         if (!Array.isArray(files)) {
             files = [files];
