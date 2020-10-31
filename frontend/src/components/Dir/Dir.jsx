@@ -59,17 +59,17 @@ export default class Dir extends React.Component {
         let type;
 
         const directories = [
-            path ? <Dirent
+            <Dirent
                 name="Up a dir"
                 key="parent"
                 isDirectory
                 parentDirectory
                 path={path}
-            /> : (<></>),
+            />,
         ]
 
         content.dirs.forEach(dir => {
-            directories.push(<Dirent name={dir} isDirectory key={dir} path={path} />)
+            directories.push(<Dirent name={dir} isDirectory key={dir} reload={()=>this.reload()} path={path} />)
         })
 
         const files = content.files.map(file => {
@@ -85,7 +85,7 @@ export default class Dir extends React.Component {
             if (this.getType(file) === 'xlsx') {
                 type = 'exel'
             }
-            return <Dirent name={file} key={file} path={path} type={type} _id={decodeToken._id} />
+            return <Dirent name={file} key={file} reload={()=>this.reload()}  path={path} type={type} _id={decodeToken._id} />
         })
 
         return [...directories, ...files]

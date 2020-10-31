@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
+import { saveAs } from 'file-saver'
+import api from '../../service/Dir';
 
 import fontawesome from '@fortawesome/fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFolder, faCog, faArrowUp, faFilePdf, faDownload, faTrash, faEdit } from '@fortawesome/fontawesome-free-solid';
+import { faFolder, faCog, faArrowUp, faFilePdf, faDownload, faTrash, faEdit, faFileExcel, faFileWord } from '@fortawesome/fontawesome-free-solid';
 
 import styles from './Dir.module.css'
 
-fontawesome.library.add(faFolder, faCog, faArrowUp, faFilePdf, faDownload, faTrash, faEdit);
+fontawesome.library.add(faFolder, faCog, faArrowUp, faFilePdf, faDownload, faTrash, faEdit, faFileExcel, faFileWord);
 
 
 const DirLink = (props) => {
@@ -32,17 +34,25 @@ const DirCard = (props) => {
 
     let img;
     let icon;
-    let path = props.path ? props.path + "/" : '';
+    let pathS = props.path ? props.path + "/" : '';
+    const token = localStorage.getItem('token');
 
     if (props.type === 'image') {
-        const srcPath = props._id + path + props.name
-        //const src = require(`${srcPath}`)
-        img = <img src={require('/home/storage/' + srcPath)} />
+        const srcPath = props._id + "/" + pathS + props.name
+        img = <img src={require('/home/santiago/storage/' + srcPath)} />
     }
 
     if (props.type === 'pdf') {
-        const colorIcon = {color: '#e63946'}
+        const colorIcon = { color: '#e63946' }
         icon = <FontAwesomeIcon icon="file-pdf" className={styles.icon} style={colorIcon} />
+    }
+    if (props.type === 'docx') {
+        const colorIcon = { color: '#a8dadc' }
+        icon = <FontAwesomeIcon icon="file-word" className={styles.icon} style={colorIcon} />
+    }
+    if (props.type === 'xlsx') {
+        const colorIcon = { color: '#40916c' }
+        icon = <FontAwesomeIcon icon="file-excel" className={styles.icon} style={colorIcon} />
     }
 
     if (props.isDirectory) {
@@ -53,6 +63,10 @@ const DirCard = (props) => {
         const styleIcon = { opacity: 0.5 }
         icon = <FontAwesomeIcon icon="arrow-up" className={styles.icon} style={styleIcon} />
     }
+
+    const path = props.path ? `${props.path}-${props.name}` : props.name;
+    const downloadLink = `http://localhost:4000/files/${path}`;
+
 
     return (
         <div className={styles.card}>
@@ -75,35 +89,43 @@ const DirCard = (props) => {
 
             {show ? props.isDirectory ? (
                 <div className={styles.options_list}>
-                <ul>
-                    <li>
-                        <button>
-                            <FontAwesomeIcon icon="edit" /> Editar
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            <FontAwesomeIcon icon="trash" /> Borrar
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            ) : (
-                <div className={styles.options_list}>
                     <ul>
                         <li>
                             <button>
-                                <FontAwesomeIcon icon="download" /> Descargar
+                                <FontAwesomeIcon icon="edit" /> Editar
                             </button>
                         </li>
                         <li>
-                            <button>
+                            <button onClick={async e => {
+                                e.preventDefault()
+                                await api.deleteDir(path, token)
+                                props.reload()
+                            }}>
                                 <FontAwesomeIcon icon="trash" /> Borrar
                             </button>
                         </li>
                     </ul>
                 </div>
-            ) : (<></>)}
+            ) : (
+                    <div className={styles.options_list}>
+                        <ul>
+                            <li>
+                                <button onClick={() => saveAs(downloadLink, props.name)}>
+                                    <FontAwesomeIcon icon="download" /> Descargar
+                                </button>
+                            </li>
+                            <li>
+                                <button onClick={async (e) => {
+                                    e.preventDefault();
+                                    await api.deleteFile(path, token)
+                                    props.reload();
+                                }}>
+                                    <FontAwesomeIcon icon="trash" /> Borrar
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                ) : (<></>)}
 
         </div>
     )
@@ -111,6 +133,11 @@ const DirCard = (props) => {
 }
 
 const Dirent = (props) => {
+    if (!props.path && props.parentDirectory) {
+        return <></>;
+    }
+
+
     return (
         <DirCard {...props} />
     )

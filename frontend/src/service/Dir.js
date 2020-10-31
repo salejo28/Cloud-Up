@@ -18,15 +18,23 @@ class Dir {
   }
 
   async getContent(path, token) {
-    return await this.apiCall(() => this.api.get('dirs/' + `${path}`, { headers: { "x-token": token } }))
+    return await this.apiCall(() => this.api.get(`dirs/${path}`, { headers: { "x-token": token } }))
   }
 
   async createDir(path, name, token) {
-    return await this.apiCall(() => this.api.post('dirs/' + `${path}`, name, { headers: { "x-token": token } }))
+    return await this.apiCall(() => this.api.post(`dirs/${path}`, name, { headers: { "x-token": token } }))
+  }
+
+  async deleteDir(path, token) {
+    return await this.apiCall(() => this.api.delete(`dirs/${path}`, { headers: { "x-token": token } }))
   }
 
   async uploadFile(path, data, token) {
-    return await this.apiCall(() => this.api.post('files/' + `${path}`, data, { headers: { "x-token": token } }))
+    return await this.apiCall(() => this.api.post(`files/${path}`, data, { headers: { "x-token": token } }))
+  }
+
+  async deleteFile(path, token) {
+    return await this.apiCall(() => this.api.delete(`files/${path}`, { headers: { "x-token": token } }));
   }
 
 }
